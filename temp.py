@@ -95,12 +95,13 @@ def count (argv):
     print(count)
 
 def colourised_output (argv):
+    
     file_path=argv[2]
     pattern=argv[3]
     with open(file_path, 'r') as file:
         for line in file:
             if re.search(pattern, line):
-                print("\033[1;32;40m", line, end='')
+                print("\033[1;32;40m", line,"\033[0m", end='')
 
 
 
