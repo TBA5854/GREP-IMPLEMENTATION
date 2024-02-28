@@ -21,14 +21,21 @@ def case_insenstive (argv):
                 for j in i:
                     if(i.lower==pattern.lower):
                         print(j)
+def invert_match (argv):
+    file_path=argv[2]
+    pattern=argv[3]
+    with open(file_path, 'r') as file:
+        for line in file:
+            if not re.search(pattern, line):
+                print(line, end='')
 
-print(sys.argv)
-print(sys.argv[1])
+
 
 if sys.argv[1] == '--help':
     help()
 elif sys.argv[1] == '-E' or sys.argv[1] == '--extended-regexp':
-    basic_search(sys.argv[2], sys.argv[3])
+    basic_search(sys.argv)
 elif sys.argv[1] == '-i' or sys.argv[1] == '--ignore-case':
-    # case_insensitive(sys.argv)
-    pass
+    case_insenstive(sys.argv)
+elif sys.argv[1] == '-v' or sys.argv[1] == '--invert-match':
+    invert_match(sys.argv)
