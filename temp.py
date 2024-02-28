@@ -28,6 +28,13 @@ def invert_match (argv):
         for line in file:
             if not re.search(pattern, line):
                 print(line, end='')
+def op_formatting (argv):
+    file_path=argv[2]
+    pattern=argv[3]
+    with open(file_path, 'r') as file:
+        data = file.readlines()
+        for i in range(len(data)):
+            print(i+1, data[i], end='')
 
 
 
@@ -39,3 +46,5 @@ elif sys.argv[1] == '-i' or sys.argv[1] == '--ignore-case':
     case_insenstive(sys.argv)
 elif sys.argv[1] == '-v' or sys.argv[1] == '--invert-match':
     invert_match(sys.argv)
+elif sys.argv[1] == '-n' or sys.argv[1] == '--line-number':
+    op_formatting(sys.argv)
