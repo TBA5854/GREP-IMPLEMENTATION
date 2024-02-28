@@ -1,5 +1,6 @@
 import sys
 import re
+import os
 
 def help():
     print("Help")
@@ -54,6 +55,36 @@ def word_match (argv):
             if re.search(r'\b' + pattern + r'\b', line):
                 print(line, end='')
 
+def recursive_search (argv):
+    file_path=argv[2]
+    pattern=argv[3]
+    for root, dirs, files in os.walk(file_path):
+        for file in files:
+            if file.endswith('.txt'):
+                with open(os.path.join(root, file), 'r') as file:
+                    for line in file:
+                        if re.search(pattern, line):
+                            print(os.path.join(root, file), line, end='')
+
+def count (argv):
+    file_path=argv[2]
+    pattern=argv[3]
+    count = 0
+    with open(file_path, 'r') as file:
+        for line in file:
+            if re.search(pattern, line):
+                count += 1
+    print(count)
+
+def colourised_output (argv):
+    file_path=argv[2]
+    pattern=argv[3]
+    with open(file_path, 'r') as file:
+        for line in file:
+            if re.search(pattern, line):
+                print("\033[1;32;40m", line, end='')
+
+
 
 if sys.argv[1] == '--help':
     help()
@@ -69,3 +100,15 @@ elif sys.argv[1] == '-x' or sys.argv[1] == '--context':
     context(sys.argv)
 elif sys.argv[1] == '-w' or sys.argv[1] == '--word':
     word_match(sys.argv)
+elif sys.argv[1] == '-r' or sys.argv[1] == '--recursive':
+    recursive_search(sys.argv)
+elif sys.argv[1] == '-c' or sys.argv[1] == '--count':
+    count(sys.argv)
+elif sys.argv[1] == '-C' or sys.argv[1] == '--colour':
+    colourised_output(sys.argv)
+    
+
+
+#if len(sys.argv) < 2:
+ #   print("No arguments provided")
+  #  sys.exit(1)
