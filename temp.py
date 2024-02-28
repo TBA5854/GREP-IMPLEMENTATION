@@ -35,7 +35,24 @@ def op_formatting (argv):
         data = file.readlines()
         for i in range(len(data)):
             print(i+1, data[i], end='')
+def context (argv):
+    file_path=argv[2]
+    pattern=argv[3]
+    with open(file_path, 'r') as file:
+        data = file.readlines()
+        for i in range(len(data)):
+            print(i+1, data[i], end='')
+            if re.search(pattern, data[i]):
+                for j in range(i-1, i+2):
+                    print(j+1, data[j], end='')
 
+def word_match (argv):
+    file_path=argv[2]
+    pattern=argv[3]
+    with open(file_path, 'r') as file:
+        for line in file:
+            if re.search(r'\b' + pattern + r'\b', line):
+                print(line, end='')
 
 
 if sys.argv[1] == '--help':
@@ -48,3 +65,7 @@ elif sys.argv[1] == '-v' or sys.argv[1] == '--invert-match':
     invert_match(sys.argv)
 elif sys.argv[1] == '-n' or sys.argv[1] == '--line-number':
     op_formatting(sys.argv)
+elif sys.argv[1] == '-x' or sys.argv[1] == '--context':
+    context(sys.argv)
+elif sys.argv[1] == '-w' or sys.argv[1] == '--word':
+    word_match(sys.argv)
