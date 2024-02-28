@@ -4,6 +4,20 @@ import os
 
 def help():
     print("Help")
+    print("Usage: python3 temp.py [OPTION]... PATTERN [FILE]...")
+    print("Search for PATTERN in each FILE.")
+    print("Example: python3 temp.py -i 'hello' file.txt")
+    print("Options:")
+    print("-E, --extended-regexp: Interpret PATTERN as an extended regular expression.")
+    print("-i, --ignore-case: Ignore case distinctions in both PATTERN and the input files.")
+    print("-v, --invert-match: Invert the sense of matching, to select non-matching lines.")
+    print("-n, --line-number: Prefix each line of output with the 1-based line number within its input file.")
+    print("-x, --context: Print 3 lines of context around, each line containing the pattern.")
+    print("-w, --word: Match only whole words.")
+    print("-r, --recursive: Read all files under each directory, recursively.")
+    print("-c, --count: Print a count of matching lines for each input file.")
+    print("-C, --colour: Highlight the matching text.")
+    
 def basic_search (argv):
     file_path=argv[2]
     pattern=argv[3]
@@ -106,7 +120,7 @@ elif sys.argv[1] == '-c' or sys.argv[1] == '--count':
     count(sys.argv)
 elif sys.argv[1] == '-C' or sys.argv[1] == '--colour':
     colourised_output(sys.argv)
-    
+
 
 
 #if len(sys.argv) < 2:
