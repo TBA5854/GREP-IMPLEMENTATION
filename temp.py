@@ -103,10 +103,15 @@ def colourised_output (argv):
             if re.search(pattern, line):
                 print("\033[1;32;40m", line,"\033[0m", end='')
 
-
+def no_args(pattern):
+    for line in sys.stdin:
+        if re.search(pattern, line):
+            print(line, end='')
 
 if sys.argv[1] == '--help':
     help()
+elif sys.argv[1] == '--version':
+    print("Version 1.0")
 elif sys.argv[1] == '-E' or sys.argv[1] == '--extended-regexp':
     basic_search(sys.argv)
 elif sys.argv[1] == '-i' or sys.argv[1] == '--ignore-case':
